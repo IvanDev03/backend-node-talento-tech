@@ -3,13 +3,13 @@ const Tarea = require("../models/Tareas.js");
 exports.createTarea = async (req, res) => {
   try {
     const tareaExistente = await Tarea.findOne({ name: req.body.nombre });
-
     if (tareaExistente) {
       return res.status(400).send({
         message:
           "Ya existe una tarea con ese nombre, por favor elige otro nombre",
       });
     }
+
     let tarea = new Tarea(req.body);
     await tarea.save();
     res.status(201).json(tarea);
