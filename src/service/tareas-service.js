@@ -2,23 +2,21 @@ const Tarea = require("../models/Tareas.js");
 
 exports.createTarea = async (req, res) => {
   try {
-    console.log("Request body:", req.body); // Log para verificar el contenido del request
     const tareaExistente = await Tarea.findOne({ name: req.body.nombre });
-    console.log("Tarea existente:", tareaExistente); 
+
     if (tareaExistente) {
       return res.status(400).send({
-        message: "Ya existe una tarea con ese nombre, por favor elige otro nombre",
+        message:
+          "Ya existe una tarea con ese nombre, por favor elige otro nombre",
       });
     }
     let tarea = new Tarea(req.body);
     await tarea.save();
     res.status(201).json(tarea);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        message: "Error al agregar la tarea, por favor revisa los logs",
-      });
+    res.status(500).send({
+      message: "Error al agregar la tarea, por favor revisa los logs",
+    });
   }
 };
 
@@ -27,11 +25,9 @@ exports.getTareas = async (req, res) => {
     const tareas = await Tarea.find();
     res.json(tareas);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        message: "Error al obtener las tareas, por favor revisa los logs",
-      });
+    res.status(500).send({
+      message: "Error al obtener las tareas, por favor revisa los logs",
+    });
   }
 };
 
