@@ -12,8 +12,8 @@ const tareasSchema = mongoose.Schema(
       required: true,
     },
     estado: {
-      type: Boolean,
-      default: true,
+      type: String,
+      required: true,
     },
     fechaCreacion: {
       type: Date,
