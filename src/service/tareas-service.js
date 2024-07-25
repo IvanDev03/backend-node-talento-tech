@@ -2,7 +2,9 @@ const Tarea = require("../models/Tareas.js");
 
 exports.createTarea = async (req, res) => {
   try {
-    const tareaExistente = await Tarea.findOne({ name: req.body.name });
+    console.log("Request body:", req.body); // Log para verificar el contenido del request
+    const tareaExistente = await Tarea.findOne({ name: req.body.nombre });
+    console.log("Tarea existente:", tareaExistente); 
     if (tareaExistente) {
       return res.status(400).send({
         message: "Ya existe una tarea con ese nombre, por favor elige otro nombre",
